@@ -14,6 +14,7 @@ The **Adaptive Persona Engine** is a privacy-first, locally deployable intellige
    - [Part 1: Persona Drift Detector](#part-1-persona-drift-detector)
    - [Part 2: Offline Intent Classifier](#part-2-offline-intent-classifier)
    - [Part 3: RAG Conflict Resolver](#part-3-rag-conflict-resolver)
+   - [Part 4: Interactive Web UI](#part-4-interactive-web-ui)
 3. [Installation & Setup](#installation--setup)
 4. [Usage Guidelines](#usage-guidelines)
 5. [Data Synchronization & Privacy](#data-synchronization--privacy)
@@ -23,7 +24,7 @@ The **Adaptive Persona Engine** is a privacy-first, locally deployable intellige
 
 ## System Architecture Overview
 
-The system is composed of three decoupled subsystems that handle data ingestion, semantic classification, and context synthesis.
+The system is composed of decoupled subsystems that handle data ingestion, semantic classification, and context synthesis, orchestrated by a local Web API.
 
 ```mermaid
 graph TD;
@@ -34,6 +35,7 @@ graph TD;
     D --> F(RAG Conflict Resolver)
     E --> F
     F --> G[Synthesized Output & Persona State]
+    G --> H[Interactive Web UI Flask App]
 ```
 
 ---
@@ -64,6 +66,13 @@ A specialized semantic handler designed to solve the "Hard Retrieval Problem" in
 *   **Contradiction Flagging:** Preemptively scans high-priority chunks to flag semantically opposed statements before passing context to the generation layer.
 *   **Coherent Synthesis:** Merges conflicting vectors logically, ensuring the output respects the evolution of the user's circumstances rather than outputting schizophrenic context.
 
+### Part 4: Interactive Web UI
+*(Location: `web/app.py` & `web/templates/` & `web/static/`)*
+
+A lightweight, premium web interface built with Flask and modern web design principles (Glassmorphism, animated gradients, responsive layout). It serves as the primary dashboard to interact with all three backend systems in real-time.
+*   **API Endpoints:** Clean REST API bridging the Python backend (`/api/drift`, `/api/intent`, `/api/resolve`) to the frontend.
+*   **Visual Prototyping:** Allows developers and stakeholders to easily inject test payloads and visualize the model's performance without relying purely on terminal outputs.
+
 ---
 
 ## Installation & Setup
@@ -73,12 +82,12 @@ A specialized semantic handler designed to solve the "Hard Retrieval Problem" in
 *   It is highly recommended to use a virtual environment (`venv` or `conda`).
 
 ### Dependency Installation
-Clone the repository and install the required numerical computing packages required for the offline classifier:
+Clone the repository and install the required packages required for the offline classifier and web server:
 
 ```bash
 git clone https://github.com/your-org/Persona-Drift-Detector.git
 cd Persona-Drift-Detector
-pip install scikit-learn joblib numpy
+pip install scikit-learn joblib numpy flask
 ```
 
 ---
@@ -86,6 +95,13 @@ pip install scikit-learn joblib numpy
 ## Usage Guidelines
 
 The modules are designed to be imported into your larger application orchestrator, but can be executed independently for demonstration and validation.
+
+### Launching the Web Interface (Recommended)
+To run the interactive web interface, launch the Flask server:
+```bash
+python web/app.py
+```
+*Expected Output:* The server will start on `http://127.0.0.1:5000/`. Open this URL in your browser to interact with all modules visually.
 
 ### Validating the Drift Detector
 ```bash
@@ -115,4 +131,4 @@ This repository utilizes a strict "Local-First" methodology. Raw audio, telemetr
 
 ## License
 
-This project is proprietary and confidential. Unauthorized copying, distribution, or adaptation of this file, via any medium, is strictly prohibited unless explicitly authorized. 
+This project is proprietary and confidential. Unauthorized copying, distribution, or adaptation of this file, via any medium, is strictly prohibited unless explicitly authorized.

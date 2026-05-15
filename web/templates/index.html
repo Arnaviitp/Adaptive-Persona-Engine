@@ -5,39 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Intelligent Persona Systems</title>
     <link rel="stylesheet" href="/static/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Include modern icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="background-animation"></div>
     <div class="container">
         <header>
-            <h1>Intelligent Persona Systems</h1>
-            <p>Advanced AI Agent Capabilities Interface</p>
+            <h1>Intelligent <span>Persona</span> Systems</h1>
+            <p>Next-generation AI agent capabilities for adaptive, context-aware, and emotionally intelligent interactions.</p>
         </header>
 
         <main>
             <section class="card" id="drift-detector">
-                <h2>1. Adaptive Persona Engine</h2>
-                <p>Analyze user logs to track mood and tone evolution over time.</p>
-                <textarea id="drift-input" rows="5"></textarea>
-                <button onclick="analyzeDrift()">Analyze Drift</button>
+                <div class="card-header">
+                    <div class="icon-wrapper"><i class="fa-solid fa-chart-line"></i></div>
+                    <h2>Adaptive Persona Engine</h2>
+                </div>
+                <p>Continuously monitor and visualize shifts in user tone and mood over time, allowing AI to adapt its persona dynamically based on conversation history.</p>
+                <div class="input-group">
+                    <textarea id="drift-input" rows="5"></textarea>
+                </div>
+                <button onclick="analyzeDrift()"><i class="fa-solid fa-bolt"></i> Analyze Drift</button>
                 <div class="output" id="drift-output"></div>
             </section>
 
             <section class="card" id="intent-classifier">
-                <h2>2. Offline Intent Classifier</h2>
-                <p>Ultra-low latency offline model for intent classification.</p>
-                <input type="text" id="intent-input" placeholder="Type a message (e.g., 'Remind me to buy milk')">
-                <button onclick="classifyIntent()">Classify Intent</button>
+                <div class="card-header">
+                    <div class="icon-wrapper"><i class="fa-solid fa-brain"></i></div>
+                    <h2>Offline Intent Classifier</h2>
+                </div>
+                <p>Lightning-fast, ultra-low latency intent classification running entirely locally, without relying on external APIs.</p>
+                <div class="input-group">
+                    <input type="text" id="intent-input" placeholder="Type a message (e.g., 'Remind me to buy milk')">
+                </div>
+                <button onclick="classifyIntent()"><i class="fa-solid fa-microchip"></i> Classify Intent</button>
                 <div class="output" id="intent-output"></div>
             </section>
 
             <section class="card" id="rag-resolver">
-                <h2>3. Conflict Resolution in RAG</h2>
-                <p>Reconcile contradictory information prioritizing recency and emotion.</p>
-                <input type="text" id="rag-query" placeholder="Query (e.g., 'Did I mention anything about my sister?')">
-                <textarea id="rag-chunks" rows="5"></textarea>
-                <button onclick="resolveConflict()">Resolve Conflict</button>
+                <div class="card-header">
+                    <div class="icon-wrapper"><i class="fa-solid fa-scale-balanced"></i></div>
+                    <h2>Conflict Resolution in RAG</h2>
+                </div>
+                <p>Intelligent synthesis of contradictory information retrieved from vector stores, elegantly prioritizing recency and emotional weight.</p>
+                <div class="input-group">
+                    <input type="text" id="rag-query" placeholder="Query (e.g., 'Did I mention anything about my sister?')">
+                    <textarea id="rag-chunks" rows="5"></textarea>
+                </div>
+                <button onclick="resolveConflict()"><i class="fa-solid fa-wand-magic-sparkles"></i> Resolve Conflict</button>
                 <div class="output" id="rag-output"></div>
             </section>
         </main>
