@@ -73,7 +73,7 @@ TRAINING_DATA = [
     ("qwertyuiop", "unknown")
 ]
 
-MODEL_PATH = "intent_classifier.joblib"
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "intent_classifier.joblib")
 
 def train_classifier(data: Optional[List[Tuple[str, str]]] = None, model_path: str = MODEL_PATH):
     """Trains a lightweight Tfidf + LogisticRegression pipeline."""
