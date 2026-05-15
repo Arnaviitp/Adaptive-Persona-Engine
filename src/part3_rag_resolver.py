@@ -1,12 +1,13 @@
 import time
 import json
+from typing import List, Dict, Any
 
 class RAGConflictResolver:
-    def __init__(self, recency_weight=0.6, emotion_weight=0.4):
+    def __init__(self, recency_weight: float = 0.6, emotion_weight: float = 0.4):
         self.recency_weight = recency_weight
         self.emotion_weight = emotion_weight
 
-    def _calculate_recency_score(self, current_time, chunk_time, max_age):
+    def _calculate_recency_score(self, current_time: int, chunk_time: int, max_age: int) -> float:
         """Calculates a normalized recency score (0.0 to 1.0)."""
         age = current_time - chunk_time
         if age < 0:
@@ -15,7 +16,7 @@ class RAGConflictResolver:
             return 0.0
         return 1.0 - (age / max_age)
 
-    def rank_chunks(self, chunks: list) -> list:
+    def rank_chunks(self, chunks: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """
         Ranks chunks based on recency and emotional weight.
         Expected chunk format: {"text": str, "timestamp": int, "emotion_weight": float}
@@ -44,7 +45,7 @@ class RAGConflictResolver:
         ranked.sort(key=lambda x: x['final_score'], reverse=True)
         return ranked
 
-    def flag_contradictions(self, chunks: list) -> list:
+    def flag_contradictions(self, chunks: List[Dict[str, Any]]) -> List[str]:
         """
         Flags contradictions among the top chunks.
         In a real scenario, an LLM or NLI (Natural Language Inference) model would be used here.
@@ -63,7 +64,7 @@ class RAGConflictResolver:
             
         return contradictions
 
-    def generate_merged_answer(self, query: str, ranked_chunks: list, contradictions: list) -> str:
+    def generate_merged_answer(self, query: str, ranked_chunks: List[Dict[str, Any]], contradictions: List[str]) -> str:
         """
         Uses an LLM to generate a merged coherent answer based on ranked chunks and flagged contradictions.
         """
@@ -83,7 +84,7 @@ class RAGConflictResolver:
         # Mock LLM response
         return "Based on your history, you used to mention not getting along with your sister, but in your most recent and emotionally charged entries, you mentioned that she is your best friend and you love her. So, it seems your relationship with your sister has significantly improved recently."
 
-    def resolve(self, query: str, retrieved_chunks: list) -> dict:
+    def resolve(self, query: str, retrieved_chunks: List[Dict[str, Any]]) -> Dict[str, Any]:
         ranked_chunks = self.rank_chunks(retrieved_chunks)
         contradictions = self.flag_contradictions(ranked_chunks)
         answer = self.generate_merged_answer(query, ranked_chunks, contradictions)

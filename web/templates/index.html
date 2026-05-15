@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intelligent Persona Systems</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-animation"></div>
+    <div class="container">
+        <header>
+            <h1>Intelligent Persona Systems</h1>
+            <p>Advanced AI Agent Capabilities Interface</p>
+        </header>
+
+        <main>
+            <section class="card" id="drift-detector">
+                <h2>1. Adaptive Persona Engine</h2>
+                <p>Analyze user logs to track mood and tone evolution over time.</p>
+                <textarea id="drift-input" rows="5"></textarea>
+                <button onclick="analyzeDrift()">Analyze Drift</button>
+                <div class="output" id="drift-output"></div>
+            </section>
+
+            <section class="card" id="intent-classifier">
+                <h2>2. Offline Intent Classifier</h2>
+                <p>Ultra-low latency offline model for intent classification.</p>
+                <input type="text" id="intent-input" placeholder="Type a message (e.g., 'Remind me to buy milk')">
+                <button onclick="classifyIntent()">Classify Intent</button>
+                <div class="output" id="intent-output"></div>
+            </section>
+
+            <section class="card" id="rag-resolver">
+                <h2>3. Conflict Resolution in RAG</h2>
+                <p>Reconcile contradictory information prioritizing recency and emotion.</p>
+                <input type="text" id="rag-query" placeholder="Query (e.g., 'Did I mention anything about my sister?')">
+                <textarea id="rag-chunks" rows="5"></textarea>
+                <button onclick="resolveConflict()">Resolve Conflict</button>
+                <div class="output" id="rag-output"></div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
